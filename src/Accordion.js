@@ -8,12 +8,12 @@ const Accordion = ({ title, author, lines, index }) => {
   //console.log(title);
   return (
     <>
-      <div class="accordion-item">
+      <div className="accordion-item">
         <div
-          class="accordion-item-header"
+          className="accordion-item-header"
           onClick={() => setIsActive(!isActive)}
         >
-          <div class="accordion-item-title">
+          <div className="accordion-item-title">
             <span>Poem: {title}</span>
           </div>
           {/* like a toggle, using isActive value to toggle it between onClick */}
@@ -28,7 +28,7 @@ const Accordion = ({ title, author, lines, index }) => {
           />
         )}
       </div>
-      <div class="divider"></div>
+      <div className="divider"></div>
     </>
   );
 };

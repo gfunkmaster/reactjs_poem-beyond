@@ -7,7 +7,11 @@ import { v4 as uuid } from 'uuid';
 
 const Home = () => {
 
-  const unique_id = uuid();
+  const uniqueId = uuid();
+
+  const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9)
+
+  console.log(keyGenerator())
 
     const {poems, fetchProduct, sortedPoems, setSortBy, sortBy, loading, showDetails,setShowDetails,addFavoritePoems} = useGlobalContext();
 
@@ -40,7 +44,7 @@ const Home = () => {
 
       {!loading ? (sortedPoems.map((poem) => {
       return (
-        <Accordion {...poem}    />
+        <Accordion {...poem}  key={keyGenerator()} />
       )
     } )): (
       <div className='loading'>
