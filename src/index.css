@@ -1,0 +1,151 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #1A1E23;
+  display: flex;
+  justify-content: center;
+}
+ul {
+  list-style-type: square;
+}
+
+.navbar-menu {
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #1A1E23;
+}
+.navbar-list{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  list-style-type: none;
+}
+
+
+.navbar-item  {
+  display: block;
+  padding: 6px 0;
+  font-family: Lato, sans-serif;
+  color: #ecf0f1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  margin: 30px;
+}
+
+
+.navbar-item:hover {
+  color: #95a5a6;
+  
+}
+
+.content{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+  width: 50%;
+  min-width: 650px;
+  background-color: #fff;
+  padding: 4em 5em;
+  border-radius: 15px;
+  box-shadow: 0px 0px 39px 6px rgba(0, 0, 0, 0.02);
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #1A1E23;
+}
+
+.intro{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.sort-dropdown{
+  margin-top: 15px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+ option {
+  margin-top: 15px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background-color: transparent;
+}
+
+.buttonFetch{
+  padding: 0 3px;
+  border: 1px solid #1A1E23;
+  margin-top: 12px;
+  background-color: transparent;
+}
+
+.buttonFetch:hover {
+  transform: scale(1.1);
+  transition: .7s ease-in;
+}
+
+.accordion-item-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.accordion-item-body-content {
+  width: 90%;
+  padding-top: 1em;
+  color: #545d7a;
+  text-align: left;
+}
+
+.accordion-item-title {
+  color: #545d7a;
+  font-size: 1.125rem;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: .3rem;
+}
+
+.poem-text{
+  width: 100%;
+}
+
+.heart {
+  color: red;
+  font-size: 1.2rem;
+}
+.trash {
+  color: blue;
+  font-size: 1.2rem;
+}
+
+
+
+.accordian-item-middle{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.middle {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+  align-items:center;
+}
+
+.btn-list {
+  display: flex;
+  flex-direction: row;
+  margin-top: -15px;
+}
