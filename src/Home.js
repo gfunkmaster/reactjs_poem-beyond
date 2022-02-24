@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
 import { useGlobalContext } from './context'
-import PoemDetails from './PoemDetails';
-import Favorites from './Favorites';
+
 import Accordion from './Accordion';
-import { v4 as uuid } from 'uuid';
+
 
 const Home = () => {
 
-  const uniqueId = uuid();
-
+  
+//random keygenaratior, because api dosent have any, easier to add,delete, edit 
   const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9)
 
-  console.log(keyGenerator())
+  //console.log(keyGenerator())
 
     const {poems, fetchProduct, sortedPoems, setSortBy, sortBy, loading, showDetails,setShowDetails,addFavoritePoems} = useGlobalContext();
 
-    console.log(showDetails);
+    //console.log(showDetails);
 
 
   return (
@@ -43,8 +42,10 @@ const Home = () => {
 
 
       {!loading ? (sortedPoems.map((poem) => {
+       // console.log(poem)
+        const sortedPoemArray = poem;
       return (
-        <Accordion {...poem}  key={keyGenerator()} />
+        <Accordion  {...sortedPoemArray}  key={poem.id} />
       )
     } )): (
       <div className='loading'>

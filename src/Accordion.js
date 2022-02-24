@@ -3,9 +3,9 @@ import "./Accordian.css";
 import { useGlobalContext } from "./context";
 import PoemDetails from "./PoemDetails";
 
-const Accordion = ({ title, author, lines, index }) => {
+const Accordion = (poem) => {
   const { poems, isActive, setIsActive } = useGlobalContext();
-  //console.log(title);
+//  console.log(poem);
   return (
     <>
       <div className="accordion-item">
@@ -14,17 +14,14 @@ const Accordion = ({ title, author, lines, index }) => {
           onClick={() => setIsActive(!isActive)}
         >
           <div className="accordion-item-title">
-            <span>Poem: {title}</span>
+            <span>Poem: {poem.title} </span>
           </div>
           {/* like a toggle, using isActive value to toggle it between onClick */}
           <div>{isActive ? "-" : "+"}</div>
         </div>
         {isActive && (
           <PoemDetails
-            title={title}
-            author={author}
-            lines={lines}
-            index={index}
+           {...poem}
           />
         )}
       </div>

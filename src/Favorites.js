@@ -4,7 +4,8 @@ import { useGlobalContext } from './context'
 
 const Favorites = () => {
 
-  const {favorites} = useGlobalContext();
+  const {favorites, removeFavoritePoem} = useGlobalContext();
+    console.log(favorites)
   return (
     <div className='content'>
     <div className="title">
@@ -12,11 +13,14 @@ const Favorites = () => {
     </div>
     <div className="intro">
     <ul>
-    {favorites?.map((item) => {
-      return (
-        <li>{item}</li>
-      )
-    })}
+    {favorites.map((item) => <div key={item.id}>
+      <h3>{item.title}</h3>
+      <button onClick={() => removeFavoritePoem(item.id)}>Delete</button>
+
+    </div>
+     
+      
+    )}
 
     </ul>
     </div>

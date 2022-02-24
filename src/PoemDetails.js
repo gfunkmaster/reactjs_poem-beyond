@@ -2,36 +2,36 @@ import React, { useState } from 'react'
 import { useGlobalContext } from './context'
 
 
-const PoemDetails = ({title, author, lines, index}) => {
+const PoemDetails = (poem) => {
     const {favorites, setFavorites, addFavoritePoems, removeFavoritePoem} = useGlobalContext();
 
 
   return (
     
         <div className="accordion-item-body-content">
-           <div class="accordion-item-title">
+           <div className="accordion-item-title">
             {/* <span>Poem: {title}</span>  */}
            
           <div className="accordian-item-middle">
           <div> 
-            <span className='middle'>Poem: {title}</span>
-            <span className='middle'>Author: {author}</span>
+            <span className='middle'>Poem: {poem.title}</span>
+            <span className='middle'>Author: {poem.author}</span>
            </div> 
           
           {/* adding and delete buttons */}
           <div className='btn-list middle'>
-            <button onClick={() =>addFavoritePoems(title)}>Add</button>
-            <button onClick={() =>removeFavoritePoem(title)}>Delete</button>
+            <button onClick={() =>addFavoritePoems(poem.title, poem.id)}>Add</button>
+            <button onClick={() =>removeFavoritePoem(poem.id)}>Delete</button>
             </div>
           </div>
             {/* line break */}
             <br></br>
           </div>
           {/* mapping throgh, to get the lines */}
-          {lines?.map((line) => {
-            console.log(line)
+          {poem.lines?.map((line,index) => {
+           // console.log(line)
           return (
-            <small className='poem-text'>{`${line} `}</small>
+            <small   key={index} className='poem-text'>{`${line} `}</small>
           )
         })}
 
