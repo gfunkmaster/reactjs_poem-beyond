@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Accordian.css";
 import { useGlobalContext } from "./context";
 import PoemDetails from "./PoemDetails";
@@ -6,20 +6,32 @@ import PoemDetails from "./PoemDetails";
 const Accordion = (poem) => {
   const { poems, isActive, setIsActive } = useGlobalContext();
 //  console.log(poem);
+
+//state for toggle for one 
+const [activeCurrentIndex, setCurrentIndex] = useState();
+//method for toggle
+const toggleShowAccordian = (id) => {
+  if(activeCurrentIndex === id) {
+    setCurrentIndex();
+  } else {
+    setCurrentIndex(id);
+  }
+}
+
   return (
     <>
-      <div className="accordion-item">
+      <div className="accordion-item" key={poem.id}>
         <div
           className="accordion-item-header"
-          onClick={() => setIsActive(!isActive)}
+         /*  onClick={() => setIsActive(!isActive)} */
         >
-          <div className="accordion-item-title">
+          <div className="accordion-item-title" onClick={() => toggleShowAccordian(poem.id)}>
             <span>Poem: {poem.title} </span>
           </div>
-          {/* like a toggle, using isActive value to toggle it between onClick */}
-          <div>{isActive ? "-" : "+"}</div>
+          {/* like a toggle, using activeCurrentIndex value to toggle it between onClick */}
+          <div>{activeCurrentIndex ? "-" : "+"}</div>
         </div>
-        {isActive && (
+        {activeCurrentIndex === poem.id && (
           <PoemDetails
            {...poem}
           />
