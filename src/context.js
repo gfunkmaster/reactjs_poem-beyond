@@ -58,6 +58,12 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("poems", JSON.stringify(poems));
   }, [poems]);
 
+
+  //check if it exist with id
+  const check = (arr, obj) => {
+    return arr.filter((arrVal) => obj.id !== arrVal.id)
+  }
+
   //add to favorites
   const addFavoritePoems = (poem, id) => {
     const newPoem = {
@@ -65,8 +71,9 @@ const AppProvider = ({ children }) => {
       title: poem,
     };
 
-    setFavorites([...favorites].concat(newPoem));
-
+    const poemToSend = check(favorites, newPoem)
+    
+    setFavorites([...poemToSend].concat(newPoem));
     console.log("added");
     setIsActive(true);
   };

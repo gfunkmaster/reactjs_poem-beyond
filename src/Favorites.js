@@ -15,6 +15,8 @@ const Favorites = () => {
     <div className="intro">
     <ul className='favorites'>
     {favorites.map((item) => <div key={item.id}>
+
+
      <li className='favorites-li'>
      <div className='flex'>
        <small style={{ display: "inline",
