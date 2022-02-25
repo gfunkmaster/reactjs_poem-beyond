@@ -7,12 +7,8 @@ import Accordion from './Accordion';
 const Home = () => {
 
   
-//random keygenaratior, because api dosent have any, easier to add,delete, edit 
-  const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9)
 
-  //console.log(keyGenerator())
-
-    const {poems, fetchProduct, sortedPoems, setSortBy, sortBy, loading, showDetails,setShowDetails,addFavoritePoems} = useGlobalContext();
+    const {fetchProduct, sortedPoems, setSortBy, sortBy, loading} = useGlobalContext();
 
     //console.log(showDetails);
 
@@ -59,36 +55,6 @@ const Home = () => {
     </div>
 
 
-
-    {/* <div className="container">
-      <div className="fetch-container">
-        <div className='buttonFetch' onClick={fetchProduct}>Fetch Poems</div>
-      </div>
-
-      
-      <div className="dropdown-container">
-                <p className="sort-title">Sort by:</p>
-                <select className='sort-dropdown'
-                value={sortBy}
-                onChange={(event) => setSortBy(event.target.value)}
-                >
-                    <option value="author">Author</option>
-                    <option value="title">Title</option>
-
-                </select>
-            </div>
-    </div>
-
-    {!loading ? (sortedPoems.map((poem) => {
-      return (
-        <Accordion {...poem}    />
-      )
-    } )): (
-      <div className='loading'>
-              <h2>Loading</h2>
-      </div>
-  )
-  } */}
     </>
   )
 }
@@ -97,18 +63,3 @@ export default Home
 
 
 
-/* 
-
-
- {poems?.map((item) => {
-        const {author, title} = item;
-        console.log(author, title);
-        return (
-            <div>
-                {author}
-                <p>{title}</p>
-            </div>
-        )
-    })}
-
-*/
