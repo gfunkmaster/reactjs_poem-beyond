@@ -23,7 +23,7 @@ const toggleShowAccordian = (id) => {
       <div className="accordion-item" key={poem.id}>
         <div
           className="accordion-item-header"
-         /*  onClick={() => setIsActive(!isActive)} */
+          onClick={() => toggleShowAccordian(poem.id)}
         >
           <div className="accordion-item-title" onClick={() => toggleShowAccordian(poem.id)}>
             <span>Poem: {poem.title} </span>

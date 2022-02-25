@@ -1,118 +1,106 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 export const url = "https://poetrydb.org/random/20";
 const AppContext = React.createContext();
 
+const getLocalStorage = () => {
+  let poems = localStorage.getItem("poems");
+  if (poems) {
+    
+    return JSON.parse(localStorage.getItem("poems"));
+  } else {
+    return [];
+  }
+};
+
 const AppProvider = ({ children }) => {
   //setting up state values
-  const [poems, setPoems] = useState([]);
-  const [sortBy, setSortBy] = useState('author');
+  const [poems, setPoems] = useState(getLocalStorage());
+  const [sortBy, setSortBy] = useState("author");
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
- 
-
-const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9)
-
-/*  const addID = () => {
-
-} */
-
-
-const headers = {'Content-Type':'application/json',
-                    'Access-Control-Allow-Origin':'*',
-                    'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'}
-
-    //fetch Products
-    const fetchProduct = async () => {
-        setLoading(true)
-      try {
-
-          const resp = await fetch(url);
-          const data = await resp.json();
-          //adding id to API, to easier remove or add things later on 
-          const addId = data.map((item) => {
-            return {
-              ...item,
-              id: uuid(),
-            };
-          });
-          
-          
-          setPoems(addId)
-
-          setLoading(false);
-
-      } catch (error) {
-          console.log(error);
-      }
-  }
-//sort poems
+  //fetch Products
+  const fetchProduct = async () => {
+    setLoading(true);
+    try {
+      const resp = await fetch(url);
+      const data = await resp.json();
+      //adding id to API, to easier remove or add things later on
+      const addId = data.map((item) => {
+        return {
+          ...item,
+          id: uuid(),
+        };
+      });
+      setPoems(addId);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //sort poems
   const sortedPoems = useMemo(
     () => poems.sort((a, b) => a[sortBy].localeCompare(b[sortBy])),
-    [poems, sortBy],
-  )
-
- /*  useEffect(() => {
-    addID();
-  }) */
+    [poems, sortBy]
+  );
 
   //useEffect
   useEffect(() => {
-    fetchProduct(url); 
-    
-}, []) 
+    fetchProduct(url);
+  }, []);
 
+  //useEffect
+  useEffect(() => {
+    //key value
+    localStorage.setItem("poems", JSON.stringify(poems));
+  }, [poems]);
 
-//useEffect
-useEffect(() => {
-  //key value
-  localStorage.setItem('poems', JSON.stringify(poems));
-}, [poems])
+  //add to favorites
+  const addFavoritePoems = (poem, id) => {
+    const newPoem = {
+      id: id,
+      title: poem,
+    };
 
-/* useEffect(() => {
-    const poemFavorites = JSON.parse(localStorage.getItem('poem-favorites'))
-    setFavorites(poemFavorites);
-}, [])
- */
-//Locale storage
-//local storage and getting the list
-const getLocalStorage = () => {
-  let list = localStorage.getItem('poems');
-  if(list){
-    return JSON.parse(localStorage.getItem('poems'));
-  } else {
-    return [];
-  }
-}
+    setFavorites([...favorites].concat(newPoem));
 
-//add to favorites
-const addFavoritePoems = (poem, id) => {
-
-const newPoem = {
-  id: id,
-  title: poem
-}
-
-setFavorites([...favorites].concat(newPoem))
-
-    console.log('added')
+    console.log("added");
     setIsActive(true);
-  //  saveToLocaleStorage(newFavoritesList);
-}
+  };
 
-//remove favorites
+  //remove favorites
 
-const removeFavoritePoem = (poemId) => {
- const updatedPoems = [...favorites].filter((item) => item.id !== poemId);
- setFavorites(updatedPoems)
-  console.log('deleted')
-   // saveToLocaleStorage(newFavoritesList);
-}
+  const removeFavoritePoem = (poemId) => {
+    const updatedPoems = [...favorites].filter((item) => item.id !== poemId);
+    setFavorites(updatedPoems);
+    console.log("deleted");
+  };
 
-  return <AppContext.Provider value={{poems, fetchProduct, sortedPoems, setSortBy, sortBy, loading, showDetails, setShowDetails,favorites ,setFavorites, addFavoritePoems, removeFavoritePoem,isActive, setIsActive}}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider
+      value={{
+        poems,
+        fetchProduct,
+        sortedPoems,
+        setSortBy,
+        sortBy,
+        loading,
+        showDetails,
+        setShowDetails,
+        favorites,
+        setFavorites,
+        addFavoritePoems,
+        removeFavoritePoem,
+        isActive,
+        setIsActive,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export const useGlobalContext = () => {

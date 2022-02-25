@@ -1,6 +1,7 @@
 import React from 'react'
 import {FaHeart,FaRegHeart} from 'react-icons/fa'
 import { useGlobalContext } from './context'
+import { BsTrash } from "react-icons/bs";
 
 const Favorites = () => {
 
@@ -12,10 +13,17 @@ const Favorites = () => {
       The Poem Story Favorites 
     </div>
     <div className="intro">
-    <ul>
+    <ul className='favorites'>
     {favorites.map((item) => <div key={item.id}>
-      <h3>{item.title}</h3>
-      <button onClick={() => removeFavoritePoem(item.id)}>Delete</button>
+     <li className='favorites-li'>
+     <div className='flex'>
+       <small style={{ display: "inline",
+       marginBottom: "1rem"
+
+      }}>{item.title}</small>
+      <span style={{ display: "inline"}} onClick={() => removeFavoritePoem(item.id)}> <BsTrash className='trash' /></span>
+     </div>
+     </li>
 
     </div>
      
