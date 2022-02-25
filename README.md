@@ -1,3 +1,10 @@
+STEPS NECCESSERY
+
+1. npm install
+2. npm start
+
+after that you browser will appear with the application. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
